@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color: black;
+}
+
+header{
+    background: linear-gradient(120deg, #fafafa, #eb9138, #e87511);
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    font-size: 20px;
+}
+.cards{
+    display: flex;
+    gap: 15px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+}
+
+.card {
+    min-width: 280px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+}
+
+.paragrafo{
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.logo-senac{
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    width: 150px;
+}
+
+.perguntas{
+    background: #f6e3d3;
+    padding: 12px 55px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+
+}
+
+.numero{
+    background: #f28c28;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.titulos-perguntas{
+    background: #f6e3d3;
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+input {
+    accent-color: #F68C1E;
+    transform: scale(1.2);
+}
+.btn{
+    border-radius: 10px;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-size: 18px;
+    background: #F68C1E;
+    color: #00539C;
+    transition: 0,2s;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: translateY(3px);
+}
+.hr{
+    color: red;
+}
+.footer{
+    background: #F68C1E;
+    text-align: center;
+    padding: 20px 20px;
+    font-size: 16px;
+}
+
+
+
+
+
+
