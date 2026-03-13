@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz SENAC</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#efefef;
+}
+
+/* HEADER */
+
+header{
+background: linear-gradient(25deg,#ddd9d9,#eb9138,#e87511);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+.logo-senac{
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    width: 160px;
+}
+
+/* PERGUNTAS */
+
+.perguntas{
+padding:40px;
+}
+
+.numero{
+background:#f28c28;
+color:white;
+padding:6px 10px;
+border-radius:6px;
+margin-right:10px;
+font-weight:bold;
+}
+
+h2{
+margin-bottom:30px;
+}
+
+/* RESPOSTAS */
+
+.titulos-perguntas{
+background:#F68C1E;
+border-radius:10px;
+padding:12px;
+margin-bottom:12px;
+}
+
+input{
+accent-color:#F68C1E;
+transform:scale(1.2);
+margin-right:8px;
+}
+
+/* BOTÕES */
+
+.botoes{
+margin-top:40px;
+display:flex;
+justify-content:space-between;
+}
+
+button{
+border-radius:10px;
+padding:10px 35px;
+font-size:18px;
+background:#F68C1E;
+color:#00539C;
+cursor:pointer;
+border:none;
+}
+
+button:hover{
+opacity:0.8;
+}
+
+/* RESULTADO */
+
+.resultado{
+text-align:center;
+font-size:22px;
+margin-top:60px;
+}
+
+/* TABELA */
+
+table{
+width:80%;
+margin:auto;
+border-collapse:collapse;
+margin-top:30px;
+background:white;
+}
+
+th{
+background:#F68C1E;
+color:white;
+padding:12px;
+}
+
+td{
+padding:12px;
+border:1px solid #ee0f0f;
+text-align:left;
+}
+
+tr:nth-child(even){
+background:#f4f4f4;
+}
+
+.titulo-tabela{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+.tabela-pontos{
+    margin-top: 30px;
+    margin-left: 50px;
+    border-collapse:collapse;
+    width: 90%;
+}
+
+th{
+    background-color:  #F68C1E;
+    color: black;
+    padding: 1rem;
+    font-size: 20px;
+    border: 1.7px solid #00539C;
+}
+
+td{
+    color:  black;
+    padding: 1rem;
+    text-align: center;
+    border: 1.7px solid #00539C;
+}
+
+tfoot td {
+    background-color: black; 
+    color: #f4f0ea;
+}
+
+.titulo-pesquisa{
+    text-align: left;
+    margin-top: 25px;
+    margin-left: 48px;
+    color: #F68C1E;
+}
+
+/* FOOTER */
+
+footer{
+background:#F68C1E;
+text-align:center;
+padding:20px;
+margin-top:60px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <img src="https://crape.org.br/wp-content/uploads/2023/04/senac-logo-4.png" class="logo-senac">
+    <h1>Quiz sobre o SENAC</h1><br>
+        
+    <div class="paragrafo">
+    <p>Teste seus conhecimentos sobre o Senac e veja o quanto você sabe sobre a Instituição!</p>
+    <p>Você poderá responder perguntas com multiplas escolhas sobre a história do SENAC e uma breve pesquisa sobre as tendências de mercado. </p>
+    </header>
+
+<div class="perguntas">
+
+<h2 id="pergunta"></h2>
+
+<div id="alternativas"></div>
+
+<div class="botoes">
+
+<button id="btnAnterior" onclick="anterior()"> ⟵ Anterior</button>
+
+<button id="btnProximo" onclick="proximo()">Próximo ⟶</button>
+
+</div>
+
+<div class="resultado" id="resultado"></div>
+
+</div>
+
+<script>
+
+let atual = 0
+let respostas = new Array(10)
+
+const perguntas = [
+
+{
+pergunta:"O que significa SENAC?",
+alternativas:[
+"Serviço Nacional de Aprendizagem Comercial",
+"Sistema Educacional Nacional Comercial",
+"Serviço Educacional Comercial",
+"Serviço Nacional Administrativo"
+],
+correta:0
+},
+
+{
+pergunta:"Em que ano o SENAC foi criado?",
+alternativas:["1935","1946","1955","1960"],
+correta:1
+},
+
+{
+pergunta:"O SENAC pertence a qual setor?",
+alternativas:[
+"Indústria",
+"Agricultura",
+"Comércio de bens, serviços e turismo",
+"Transporte"
+],
+correta:2
+},
+
+{
+pergunta:"Qual é o objetivo do SENAC?",
+alternativas:[
+"Formar profissionais para o comércio",
+"Ensinar matemática",
+"Criar universidades",
+"Produzir produtos"
+],
+correta:0
+},
+
+{
+pergunta:"O SENAC faz parte de qual sistema?",
+alternativas:[
+"Sistema S",
+"Sistema Federal",
+"Sistema Industrial",
+"Sistema Escolar"
+],
+correta:0
+},
+
+{
+pergunta:"O SENAC oferece cursos em qual área?",
+alternativas:[
+"Saúde",
+"Gastronomia",
+"Tecnologia",
+"Todas as alternativas"
+],
+correta:3
+},
+
+{
+pergunta:"Qual área de cursos você tem mais interesse em estudar?",
+alternativas:[
+"Tecnologia / Informática",
+"Administração e negócios",
+"Gastronomia",
+"Moda e beleza",
+]
+},
+
+{
+pergunta:"O que mais influencia sua escolha por um curso?",
+alternativas:[
+"Preço",
+"Qualidade do ensino",
+"Certificado reconhecido",
+"Possibilidade de emprego",
+]
+},
+
+{
+pergunta:"O que mais falta nos cursos atuais do SENAC?",
+alternativas:[
+"Mais aulas práticas",
+"Cursos mais modernos",
+"Mais opções de horários",
+"Mais cursos online"
+]
+},
+
+{
+pergunta:"Como você prefere estudar um curso profissionalizante?",
+alternativas:[
+"Presencial",
+"Online",
+"Híbrido (parte presencial e parte online)",
+"Intensivo de curta duração",
+]
+},
+
+{
+pergunta:"O que faria você indicar um curso do SENAC para outras pessoas?",
+alternativas:[
+"Qualidade do ensino",
+"Certificado reconhecido",
+"Empregabilidade",
+"Preço acessível"
+]
+}
+
+]
+
+function carregar(){
+
+let p = perguntas[atual]
+
+document.getElementById("pergunta").innerHTML =
+'<span class="numero">'+(atual+1)+'</span> '+p.pergunta
+
+let html=""
+
+p.alternativas.forEach((alt,i)=>{
+
+html += `
+<div class="titulos-perguntas">
+<label>
+<input type="radio" name="resposta" value="${i}">
+${alt}
+</label>
+</div>
+`
+
+})
+
+document.getElementById("alternativas").innerHTML = html
+
+if(atual === 0){
+document.getElementById("btnAnterior").style.visibility="hidden"
+}else{
+document.getElementById("btnAnterior").style.visibility="visible"
+}
+
+}
+
+function proximo(){
+
+let resp = document.querySelector('input[name="resposta"]:checked')
+
+if(resp){
+respostas[atual] = resp.value
+}
+
+if(atual < perguntas.length-2){
+
+atual++
+carregar()
+
+}else{
+
+resultado()
+
+}
+
+}
+
+function anterior(){
+
+if(atual > 0){
+atual--
+carregar()
+}
+
+}
+
+function resultado(){
+
+let pontos = 0
+
+respostas.forEach((r,i)=>{
+
+if(i <=5){
+
+if(Number(r) === perguntas[i].correta){
+pontos++
+}
+
+}else{
+
+if(r != null){
+pontos++
+}
+
+}
+
+})
+
+document.getElementById("alternativas").innerHTML=""
+document.getElementById("pergunta").innerHTML=""
+document.querySelector(".botoes").style.display="none"
+
+document.getElementById("resultado").innerHTML = `
+
+<h3>Você fez ${pontos} pontos de 10</h3>
+
+<table>
+
+<tr>
+<th>Pontuação</th>
+<th>Avaliação</th>
+</tr>
+
+<tr>
+<td>0 - 2</td>
+<td>😞 Ops! Você mandou mal dessa vez. Mas não desanime, revise o conteúdo e tente novamente!</td>
+</tr>
+
+<tr>
+<td>3 - 5</td>
+<td>🙂 Parabéns! Você tem algum conhecimento sobre o SENAC, mas ainda pode melhorar.</td>
+</tr>
+
+<tr>
+<td>6 - 8</td>
+<td>😍 Muito bem! Você se saiu bem e acertou a maior parte das perguntas.</td>
+</tr>
+
+<tr>
+<td>9 - 10</td>
+<td>🏆 Excelente! Você domina o tema e acertou praticamente tudo. Parabéns!</td>
+</tr>
+
+</table>
+
+`
+
+}
+
+carregar()
+
+</script>
+
+</body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer>
+<p>Quiz realizado pela aluna Bruna dos Santos no curso de Desenvolvimento de página web 2026.1</p>
+</footer>
+</html>
+
