@@ -26,22 +26,28 @@ background:#efefef;
 header{
 background: linear-gradient(25deg,#ddd9d9,#eb9138,#e87511);
 color:white;
-padding:60px 30px 30px 30px;
+padding:30px 20px;
 text-align:center;
-position: relative;
 }
 
 .logo-senac{
-    position: absolute;
-    top: 10px;
-    left: 50px;
-    width: 160px;
+width:140px;
+margin-bottom:10px;
+}
+
+/* TEXTO HEADER */
+
+.paragrafo{
+max-width:700px;
+margin:auto;
 }
 
 /* PERGUNTAS */
 
 .perguntas{
 padding:40px;
+max-width:900px;
+margin:auto;
 }
 
 .numero{
@@ -64,6 +70,7 @@ background:#F68C1E;
 border-radius:10px;
 padding:12px;
 margin-bottom:12px;
+color:black;
 }
 
 input{
@@ -78,6 +85,8 @@ margin-right:8px;
 margin-top:40px;
 display:flex;
 justify-content:space-between;
+flex-wrap:wrap;
+gap:10px;
 }
 
 button{
@@ -105,7 +114,7 @@ margin-top:60px;
 /* TABELA */
 
 table{
-width:80%;
+width:90%;
 margin:auto;
 border-collapse:collapse;
 margin-top:30px;
@@ -116,56 +125,13 @@ th{
 background:#F68C1E;
 color:white;
 padding:12px;
+border:1.7px solid #00539C;
 }
 
 td{
 padding:12px;
-border:1px solid #ee0f0f;
-text-align:left;
-}
-
-tr:nth-child(even){
-background:#f4f4f4;
-}
-
-.titulo-tabela{
-    text-align: center;
-    margin-top: 50px;
-    font-size: 25px;
-}
-
-.tabela-pontos{
-    margin-top: 30px;
-    margin-left: 50px;
-    border-collapse:collapse;
-    width: 90%;
-}
-
-th{
-    background-color:  #F68C1E;
-    color: black;
-    padding: 1rem;
-    font-size: 20px;
-    border: 1.7px solid #00539C;
-}
-
-td{
-    color:  black;
-    padding: 1rem;
-    text-align: center;
-    border: 1.7px solid #00539C;
-}
-
-tfoot td {
-    background-color: black; 
-    color: #f4f0ea;
-}
-
-.titulo-pesquisa{
-    text-align: left;
-    margin-top: 25px;
-    margin-left: 48px;
-    color: #F68C1E;
+border:1.7px solid #00539C;
+text-align:center;
 }
 
 /* FOOTER */
@@ -177,6 +143,29 @@ padding:20px;
 margin-top:60px;
 }
 
+/* RESPONSIVO */
+
+@media (max-width:600px){
+
+.perguntas{
+padding:20px;
+}
+
+button{
+width:100%;
+font-size:16px;
+}
+
+.botoes{
+flex-direction:column;
+}
+
+h1{
+font-size:24px;
+}
+
+}
+
 </style>
 
 </head>
@@ -184,13 +173,17 @@ margin-top:60px;
 <body>
 
 <header>
-    <img src="https://crape.org.br/wp-content/uploads/2023/04/senac-logo-4.png" class="logo-senac">
-    <h1>Quiz sobre o SENAC</h1><br>
-        
-    <div class="paragrafo">
-    <p>Teste seus conhecimentos sobre o Senac e veja o quanto você sabe sobre a Instituição!</p>
-    <p>Você poderá responder perguntas com multiplas escolhas sobre a história do SENAC e uma breve pesquisa sobre as tendências de mercado. </p>
-    </header>
+
+<img src="https://crape.org.br/wp-content/uploads/2023/04/senac-logo-4.png" class="logo-senac">
+
+<h1>Quiz sobre o SENAC</h1>
+
+<div class="paragrafo">
+<p>Teste seus conhecimentos sobre o Senac e veja o quanto você sabe sobre a Instituição!</p>
+<p>Você poderá responder perguntas com múltiplas escolhas sobre a história do SENAC e uma breve pesquisa sobre as tendências de mercado.</p>
+</div>
+
+</header>
 
 <div class="perguntas">
 
@@ -200,7 +193,7 @@ margin-top:60px;
 
 <div class="botoes">
 
-<button id="btnAnterior" onclick="anterior()"> ⟵ Anterior</button>
+<button id="btnAnterior" onclick="anterior()">⟵ Anterior</button>
 
 <button id="btnProximo" onclick="proximo()">Próximo ⟶</button>
 
@@ -213,7 +206,7 @@ margin-top:60px;
 <script>
 
 let atual = 0
-let respostas = new Array(10)
+let respostas = new Array(11)
 
 const perguntas = [
 
@@ -284,7 +277,7 @@ alternativas:[
 "Tecnologia / Informática",
 "Administração e negócios",
 "Gastronomia",
-"Moda e beleza",
+"Moda e beleza"
 ]
 },
 
@@ -294,7 +287,7 @@ alternativas:[
 "Preço",
 "Qualidade do ensino",
 "Certificado reconhecido",
-"Possibilidade de emprego",
+"Possibilidade de emprego"
 ]
 },
 
@@ -314,17 +307,7 @@ alternativas:[
 "Presencial",
 "Online",
 "Híbrido (parte presencial e parte online)",
-"Intensivo de curta duração",
-]
-},
-
-{
-pergunta:"O que faria você indicar um curso do SENAC para outras pessoas?",
-alternativas:[
-"Qualidade do ensino",
-"Certificado reconhecido",
-"Empregabilidade",
-"Preço acessível"
+"Intensivo de curta duração"
 ]
 }
 
@@ -370,15 +353,11 @@ if(resp){
 respostas[atual] = resp.value
 }
 
-if(atual < perguntas.length-2){
-
+if(atual < perguntas.length-1){
 atual++
 carregar()
-
 }else{
-
 resultado()
-
 }
 
 }
@@ -459,20 +438,9 @@ carregar()
 
 </script>
 
-</body>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <footer>
 <p>Quiz realizado pela aluna Bruna dos Santos no curso de Desenvolvimento de página web 2026.1</p>
 </footer>
-</html>
 
+</body>
+</html>
